@@ -1,0 +1,11 @@
+# Allt utom sidans faktiska filer hålls utanför byggkontexten.
+.git
+.github
+.gitignore
+.claude
+.vscode
+.idea
+README.md
+Dockerfile
+.dockerignore
+*.md

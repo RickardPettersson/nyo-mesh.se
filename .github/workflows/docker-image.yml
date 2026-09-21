@@ -1,0 +1,104 @@
+name: Docker image
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  REGISTRY: ghcr.io
+
+# Ny push på samma PR avbryter ett pågående bygge. På main och taggar får
+# bygget alltid gå klart — varje commit där ska ge en publicerad image.
+concurrency:
+  group: docker-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # GHCR kräver gemener i image-namnet, och ägaren heter RickardPettersson
+      # med versaler. Utan det här steget avvisas push:en.
+      - name: Image-namn i gemener
+        id: image
+        run: echo "name=${GITHUB_REPOSITORY,,}" >> "$GITHUB_OUTPUT"
+
+      - name: Sätt upp QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Sätt upp Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # Bygg först en vanlig amd64-image lokalt och testa den. Ett bygge som
+      # lyckas men serverar 404 ska inte publiceras. Lagren återanvänds sedan
+      # av publiceringssteget via samma cache.
+      - name: Bygg testimage
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/amd64
+          load: true
+          tags: nyo-mesh:test
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Rökprov
+        run: |
+          docker run -d --name nyo-mesh-test -p 8080:80 nyo-mesh:test
+          for i in $(seq 1 15); do
+            curl -fsS http://127.0.0.1:8080/healthz >/dev/null 2>&1 && break
+            sleep 1
+          done
+          curl -fsS http://127.0.0.1:8080/healthz
+          curl -fsS http://127.0.0.1:8080/ -o /tmp/page.html
+          grep -q 'MeshCore' /tmp/page.html
+          curl -fsS -o /dev/null http://127.0.0.1:8080/css/styles.css
+          curl -fsS -o /dev/null http://127.0.0.1:8080/js/site.js
+          # Sidan har inga andra sökvägar — okända ska ge 404, inte index.html.
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:8080/finns-inte)" = "404"
+          docker rm -f nyo-mesh-test
+
+      # Pull requests byggs och testas, men publiceras inte.
+      - name: Logga in mot GHCR
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Taggar och metadata
+        if: github.event_name != 'pull_request'
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ steps.image.outputs.name }}
+          tags: |
+            type=ref,event=branch
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=sha,format=short
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Bygg och publicera
+        if: github.event_name != 'pull_request'
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
