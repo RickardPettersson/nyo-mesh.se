@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nyköping MeshCore-nätverk</title>
+<meta name="description" content="Nyköping MeshCore-nätverk – ett lokalt, ideellt mesh-nätverk över LoRa som fungerar utan mobilnät och internet. Läs om tekniken, hårdvaran och hur du kommer igång.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="navbar navbar-expand-lg sticky-top site-nav">
+  <div class="container">
+    <a class="navbar-brand brand" href="#topp">
+      <span class="brand-mark">nyo</span>
+      <span class="brand-name">Nyköping MeshCore</span>
+    </a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainnav" aria-controls="mainnav" aria-expanded="false" aria-label="Meny">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainnav">
+      <ul class="navbar-nav ms-auto site-nav-list">
+        <li class="nav-item"><a class="nav-link" href="#om-oss">Om oss</a></li>
+        <li class="nav-item"><a class="nav-link" href="#meshcore">Vad är MeshCore</a></li>
+        <li class="nav-item"><a class="nav-link" href="#anvandning">Användning</a></li>
+        <li class="nav-item"><a class="nav-link" href="#natverket">Nätverket</a></li>
+        <li class="nav-item"><a class="nav-link" href="#hardvara">Hårdvara</a></li>
+        <li class="nav-item"><a class="nav-link" href="#kom-igang">Kom igång</a></li>
+        <li class="nav-item"><a class="nav-link" href="#lankar">Bli involverad</a></li>
+        <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header id="topp" class="hero">
+  <div class="container">
+    <div class="row align-items-end g-5">
+      <div class="col-lg-7">
+        <p class="eyebrow eyebrow-light">Fritt radionätverk i Sörmland</p>
+        <h1 class="hero-title">Nyköping<br>MeshCore-nätverk</h1>
+        <p class="hero-lead">Ett lokalt, ideellt mesh-nätverk som låter oss skicka textmeddelanden över hela Nyköping utan mobilnät, internet eller abonnemang. Byggt av privatpersoner, öppet för alla.</p>
+        <div class="d-flex flex-wrap btn-row">
+          <a href="#kom-igang" class="btn-pill btn-pill-lime">Så kommer du igång</a>
+          <a href="#lankar" class="btn-pill btn-pill-ghost">Länkar &amp; nätverkskarta</a>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="status-card">
+          <p class="eyebrow eyebrow-light">Status september 2026</p>
+          <div class="row g-4">
+            <div class="col-6">
+              <div class="stat-num">4</div>
+              <div class="stat-label">solcellsdrivna repeatrar</div>
+            </div>
+            <div class="col-6">
+              <div class="stat-num">3</div>
+              <div class="stat-label">privatpersoner bakom nätet</div>
+            </div>
+            <div class="col-12 status-card-note">
+              Täcker stora delar av Nyköpings tätort. Fler repeatrar är planerade.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ OM OSS ============ -->
+<section id="om-oss" class="section section-intro">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <p class="eyebrow">Om oss</p>
+        <h2 class="section-title">Vilka vi är</h2>
+      </div>
+      <div class="col-lg-8">
+        <p class="lead-text">Nyköping MeshCore-nätverk drivs av ett par lokala entusiaster som satt upp solcellsdrivna radionoder på hustak och höjder runt staden. Tillsammans bildar noderna ett <strong>mesh</strong> – ett nätverk där varje nod vidarebefordrar meddelanden till nästa, så att räckvidden blir betydligt större än vad en enskild radio klarar.</p>
+        <p class="body-text">Nätverket är helt ideellt och kostnadsfritt att använda. Det finns ingen central server, ingen operatör och ingen inloggning – bara radio. Vi bygger det för att det är tekniskt roligt, för att det ger lokal kommunikation som fungerar även när annan infrastruktur ligger nere, och för att vi gärna blir fler.</p>
+        <p class="body-text mb-0">Är du nyfiken lokalbo, radioamatör, prepper eller representerar en förening eller kommunal verksamhet – hör gärna av dig. Vi delar med oss av erfarenheter, nodplaceringar och hjälp att komma igång.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VAD ÄR MESHCORE ============ -->
+<section id="meshcore" class="section">
+  <div class="container">
+    <div class="panel">
+      <div class="row g-5">
+        <div class="col-lg-5">
+          <p class="eyebrow">Tekniken</p>
+          <h2 class="section-title">Vad är MeshCore?</h2>
+          <p class="body-text mb-0">MeshCore är en öppen programvara för små radioenheter som bygger självorganiserande mesh-nätverk över LoRa – en radioteknik för långa avstånd och mycket låg effekt. Inget SIM-kort, inget wifi, ingen molntjänst.</p>
+        </div>
+        <div class="col-lg-7">
+          <div class="row g-4">
+            <div class="col-md-6">
+              <h3 class="feature-title">LoRa-radio, inte internet</h3>
+              <p class="feature-text">Meddelanden går som radiopaket på fria frekvensband. Räckvidden per hopp är typiskt några kilometer i stadsmiljö och betydligt mer med fri sikt mellan höga punkter.</p>
+            </div>
+            <div class="col-md-6">
+              <h3 class="feature-title">Mesh med repeatrar</h3>
+              <p class="feature-text">Fasta repeatrar vidarebefordrar trafiken vidare. Din handenhet behöver bara nå närmaste repeater för att nå hela nätet.</p>
+            </div>
+            <div class="col-md-6">
+              <h3 class="feature-title">Krypterade meddelanden</h3>
+              <p class="feature-text">Direktmeddelanden mellan två användare är krypterade end-to-end. Publika kanaler är öppna för alla i nätet, precis som en anslagstavla.</p>
+            </div>
+            <div class="col-md-6">
+              <h3 class="feature-title">Telefonen som skärm</h3>
+              <p class="feature-text">Du kopplar en liten LoRa-enhet till mobilen via Bluetooth och skriver i en app. Enheten sköter radiotrafiken, telefonen är bara tangentbord och skärm.</p>
+            </div>
+            <div class="col-md-6">
+              <h3 class="feature-title">Extremt låg strömförbrukning</h3>
+              <p class="feature-text">En repeater klarar sig på en liten solpanel och ett batteri året runt. Därför kan noderna sitta på platser utan eluttag.</p>
+            </div>
+            <div class="col-md-6">
+              <h3 class="feature-title">Öppet och licensfritt</h3>
+              <p class="feature-text">Banden som används kräver ingen radiolicens. Programvaran är öppen källkod och hårdvaran finns att köpa från flera tillverkare.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ANVÄNDNINGSOMRÅDEN ============ -->
+<section id="anvandning" class="section">
+  <div class="container">
+    <p class="eyebrow">Användningsområden</p>
+    <h2 class="section-title">Vad använder man det till?</h2>
+    <p class="lead-text section-lead">MeshCore ersätter inte mobilnätet – det kompletterar det. Här är de vanligaste anledningarna att vara med i nätet.</p>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4">
+        <div class="card-plain">
+          <div class="card-rule"></div>
+          <h3 class="card-title">Beredskap och kris</h3>
+          <p class="card-text">Vid strömavbrott, storm eller överbelastat mobilnät fungerar nätverket vidare. Solcellsdrivna noder och batteridrivna handenheter är oberoende av elnät och operatörer.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="card-plain">
+          <div class="card-rule"></div>
+          <h3 class="card-title">Friluftsliv och skärgård</h3>
+          <p class="card-text">Håll kontakt på vandring, paddling eller båtturer i områden där täckningen är svag. Positionsdelning gör det lätt att hitta varandra.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="card-plain">
+          <div class="card-rule"></div>
+          <h3 class="card-title">Evenemang och arbetslag</h3>
+          <p class="card-text">Funktionärer på lopp, marknader eller skogsarbeten kan kommunicera i grupp utan att belasta telefonnätet eller köpa komradio.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="card-plain">
+          <div class="card-rule"></div>
+          <h3 class="card-title">Radioteknik som hobby</h3>
+          <p class="card-text">Experimentera med antenner, räckvidd, placeringar och solcellsdrift. En praktisk och billig väg in i radio för både amatörer och nyfikna.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="card-plain">
+          <div class="card-rule"></div>
+          <h3 class="card-title">Sensorer och telemetri</h3>
+          <p class="card-text">Temperatur, vattennivå eller batteristatus kan rapporteras över nätet från platser utan nätuppkoppling.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="card-plain card-green">
+          <div class="card-rule"></div>
+          <h3 class="card-title">Lokal gemenskap</h3>
+          <p class="card-text">Den publika kanalen används för att prata teknik, rapportera räckviddstester och hjälpa nya igång. Det är ofta här man börjar.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NÄTVERKSSTATUS ============ -->
+<section id="natverket" class="section section-sand">
+  <div class="container">
+    <div class="row g-5 align-items-start">
+      <div class="col-lg-5">
+        <p class="eyebrow">Nätverksstatus</p>
+        <h2 class="section-title">Nätet i Nyköping idag</h2>
+        <p class="body-text">I mitten av september 2026 består nätverket av <strong>fyra solcellsdrivna repeatrar</strong>, uppsatta och underhållna av tre privatpersoner. Tillsammans täcker de stora delar av Nyköpings tätort, och fler noder är planerade för att nå ut mot kringliggande områden.</p>
+        <a href="https://map.meshcore.dev/" target="_blank" rel="noopener" class="btn-pill btn-pill-green">Öppna nätverkskartan →</a>
+      </div>
+      <div class="col-lg-7">
+        <div class="factbox">
+          <div class="factgrid">
+            <div class="factcell">
+              <div class="fact-label">Aktiva repeatrar</div>
+              <div class="fact-value">4</div>
+            </div>
+            <div class="factcell">
+              <div class="fact-label">Strömförsörjning</div>
+              <div class="fact-value">Solceller</div>
+            </div>
+            <div class="factcell">
+              <div class="fact-label">Täckning</div>
+              <div class="fact-value">Tätorten</div>
+            </div>
+            <div class="factcell">
+              <div class="fact-label">Kostnad att delta</div>
+              <div class="fact-value">0 kr</div>
+            </div>
+          </div>
+          <div class="factbox-note">
+            <p class="card-text mb-0">Täckningen varierar med antennhöjd och terräng. Inne i lägenhet kan det behövas en fönsterplacerad antenn, medan en nod på tak eller balkong ofta når flera kilometer. Bästa sättet att veta är att testa – vi hjälper gärna till.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HÅRDVARA ============ -->
+<section id="hardvara" class="section">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <p class="eyebrow">Hårdvara</p>
+        <h2 class="section-title">Vad ska jag köpa?</h2>
+        <p class="body-text mb-0">Du behöver en liten LoRa-enhet för <strong>868 MHz</strong> (det band som används i Europa). Priset ligger typiskt mellan några hundralappar och ett par tusen kronor beroende på modell och tillbehör.</p>
+      </div>
+      <div class="col-lg-8">
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="card-plain">
+              <div class="card-kicker">Enklast</div>
+              <h3 class="feature-title">Handenhet med skärm</h3>
+              <p class="card-text mb-0">En fristående enhet med display, tangentbord eller knappar och inbyggt batteri. Fungerar direkt ur lådan, utan mobil.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card-plain">
+              <div class="card-kicker">Vanligast</div>
+              <h3 class="feature-title">Enhet + mobilapp</h3>
+              <p class="card-text mb-0">En liten modul i fickan eller ryggsäcken som du parar med telefonen via Bluetooth. Billigast per funktion och smidigast att skriva på.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card-plain">
+              <div class="card-kicker">För nätet</div>
+              <h3 class="feature-title">Repeater med solcell</h3>
+              <p class="card-text mb-0">Enhet, batteri, solpanel, antenn och ett vädertätt hölje – monterat högt. Det här är vad som får nätet att växa.</p>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="callout">
+              <p class="card-text mb-0"><strong class="callout-strong">Antennen betyder mer än radion.</strong> En bättre antenn, monterad högre och med fri sikt, ger nästan alltid mer räckvidd än en dyrare enhet. Fråga gärna i Discord-kanalen innan du köper – vi har testat en del och kan tipsa om vad som fungerar lokalt.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KOM IGÅNG ============ -->
+<section id="kom-igang" class="section section-dark">
+  <div class="container">
+    <p class="eyebrow eyebrow-light">Kom igång</p>
+    <h2 class="section-title">Fem steg in i nätverket</h2>
+    <p class="lead-text section-lead">Räkna med en kväll från uppackning till första meddelandet. Har du frågor på vägen finns vi i Discord.</p>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4">
+        <div class="step">
+          <div class="step-num">01</div>
+          <h3 class="card-title">Skaffa en LoRa-enhet</h3>
+          <p class="card-text mb-0">Välj en modell för 868 MHz enligt hårdvaruavsnittet ovan. Fråga i communityn om du är osäker på vad som passar dig.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="step">
+          <div class="step-num">02</div>
+          <h3 class="card-title">Installera MeshCore</h3>
+          <p class="card-text mb-0">Enheten flashas med MeshCores programvara direkt från webbläsaren via USB. Välj rollen <em>Companion</em> för en vanlig användarenhet.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="step">
+          <div class="step-num">03</div>
+          <h3 class="card-title">Koppla mobilen</h3>
+          <p class="card-text mb-0">Ladda ner MeshCore-appen till Android eller iOS, para enheten över Bluetooth och sätt ett namn som andra känner igen dig på.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="step">
+          <div class="step-num">04</div>
+          <h3 class="card-title">Hitta nätet</h3>
+          <p class="card-text mb-0">Är du inom räckvidd dyker våra repeatrar upp i listan efter en stund. Ligg gärna nära ett fönster eller gå ut första gången du testar.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="step">
+          <div class="step-num">05</div>
+          <h3 class="card-title">Säg hej</h3>
+          <p class="card-text mb-0">Skriv i den publika kanalen och berätta var i Nyköping du sitter. Då kan vi tillsammans se hur täckningen ser ut hos dig.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="step step-highlight">
+          <div class="step-num">NÄSTA</div>
+          <h3 class="card-title">Bygg en egen repeater</h3>
+          <p class="card-text">Har du tillgång till ett tak, en höjd eller en mast? Då kan du utöka täckningen för alla i Nyköping.</p>
+          <a href="#lankar" class="step-link">Hör av dig →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BLI INVOLVERAD ============ -->
+<section id="lankar" class="section">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <p class="eyebrow">Bli involverad</p>
+        <h2 class="section-title">Länkar och gemenskap</h2>
+        <p class="body-text mb-0">Det finns ingen anmälan och inget medlemskap – du blir en del av nätet i samma stund som din enhet är igång. Men det är i community-kanalerna som kunskapen finns.</p>
+      </div>
+      <div class="col-lg-8">
+        <div class="linklist">
+          <a href="https://map.meshcore.dev/" target="_blank" rel="noopener" class="linkcard linkcard-green">
+            <div class="linkcard-head">
+              <span class="linkcard-title">Nätverkskartan</span>
+              <span class="linkcard-meta">map.meshcore.dev ↗</span>
+            </div>
+            <p class="linkcard-text">Se vilka noder som är aktiva och var de sitter. Bra för att bedöma om du har täckning där du bor och för att hitta luckor där en ny repeater skulle göra störst nytta.</p>
+          </a>
+          <a href="https://meshat.se/" target="_blank" rel="noopener" class="linkcard">
+            <div class="linkcard-head">
+              <span class="linkcard-title">meshat.se</span>
+              <span class="linkcard-meta">Svensk samlingsplats ↗</span>
+            </div>
+            <p class="linkcard-text">Samlingsplats för dig som bygger, använder och utvecklar mesh-nätverk i Sverige. Guider, nyheter och kontakt med andra lokala nät – bra första anhalt om du vill läsa på svenska.</p>
+          </a>
+          <a href="https://discord.com/invite/gchSzHkPGG" target="_blank" rel="noopener" class="linkcard">
+            <div class="linkcard-head">
+              <span class="linkcard-title">SWEDEN-MESH på Discord</span>
+              <span class="linkcard-meta">Chatt ↗</span>
+            </div>
+            <p class="linkcard-text">Den svenska Discord-servern för mesh-nätverk. Här ställer du frågor om hårdvara, flashning och antenner, och här når du oss som driver noderna i Nyköping. Snabbaste vägen till hjälp.</p>
+          </a>
+          <a href="https://meshcore.io/" target="_blank" rel="noopener" class="linkcard">
+            <div class="linkcard-head">
+              <span class="linkcard-title">MeshCore – officiell webbplats</span>
+              <span class="linkcard-meta">Projektet ↗</span>
+            </div>
+            <p class="linkcard-text">Projektets egen sida med dokumentation, appar, flashverktyg och listor över kompatibel hårdvara. Här hittar du de tekniska detaljerna och senaste versionerna.</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq" class="section section-faq">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <p class="eyebrow">FAQ</p>
+        <h2 class="section-title mb-0">Vanliga frågor</h2>
+      </div>
+      <div class="col-lg-8">
+        <div class="accordion faq-accordion" id="faqAccordion">
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">Behöver jag radiolicens eller amatörcertifikat?</button></h3>
+            <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">Nej. Nätverket använder licensfria frekvensband, så vem som helst får delta med godkänd utrustning. Är du radioamatör har du däremot ofta extra nytta av kunskapen om antenner och placering.</div></div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">Kostar det något att vara med?</button></h3>
+            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">Nätverket är gratis att använda. Den enda kostnaden är din egen hårdvara. Det finns inga avgifter, abonnemang eller medlemsavgifter.</div></div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">Kan jag ringa eller skicka bilder?</button></h3>
+            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">Nej. LoRa har mycket låg datahastighet och är gjord för korta textmeddelanden, positioner och sensorvärden. Tänk sms snarare än internet.</div></div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">Kan andra läsa mina meddelanden?</button></h3>
+            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">Direktmeddelanden är krypterade mellan dig och mottagaren. Meddelanden i publika kanaler kan läsas av alla i nätet – behandla dem som öppna anslag och skicka inte känslig information där.</div></div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">Har jag täckning där jag bor?</button></h3>
+            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">Stora delar av Nyköpings tätort täcks av våra fyra repeatrar, men hus, kullar och antennplacering påverkar mycket. Titta på nätverkskartan och fråga i Discord – vi kan ofta säga hur det brukar fungera i just ditt område.</div></div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6">Vad krävs för att sätta upp en repeater?</button></h3>
+            <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">En LoRa-enhet, batteri, liten solpanel, antenn och ett vädertätt hölje – samt en hög och säker placering med fastighetsägarens godkännande. Vi hjälper gärna till med planering och konfiguration.</div></div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq7">Vi är en förening eller kommunal verksamhet – kan vi samarbeta?</button></h3>
+            <div id="faq7" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">Absolut. Tillgång till höga byggnader eller master är det som snabbast förbättrar täckningen, och nätet kan vara ett komplement i beredskapsplanering. Kontakta oss via Discord-kanalen för en dialog.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="row g-4 align-items-start">
+      <div class="col-md-6">
+        <div class="brand footer-brand">
+          <span class="brand-mark brand-mark-lime">nyo</span>
+          <span class="brand-name">Nyköping MeshCore-nätverk</span>
+        </div>
+        <p class="footer-text">Ideellt mesh-nätverk över LoRa i Nyköping. Drivet av lokala entusiaster – inte av någon operatör eller myndighet.</p>
+      </div>
+      <div class="col-md-3">
+        <div class="footer-heading">Genvägar</div>
+        <div class="footer-links">
+          <a href="#meshcore">Vad är MeshCore</a>
+          <a href="#kom-igang">Kom igång</a>
+          <a href="#faq">Vanliga frågor</a>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="footer-heading">Community</div>
+        <div class="footer-links">
+          <a href="https://discord.com/invite/gchSzHkPGG" target="_blank" rel="noopener">SWEDEN-MESH Discord</a>
+          <a href="https://meshat.se/" target="_blank" rel="noopener">meshat.se</a>
+          <a href="https://map.meshcore.dev/" target="_blank" rel="noopener">Nätverkskarta</a>
+        </div>
+      </div>
+      <div class="col-12 footer-bottom">
+        <p class="mb-0">Uppdaterad september 2026 · nyo-mesh.se</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>

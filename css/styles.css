@@ -1,0 +1,216 @@
+/* ==========================================================================
+   Nyköping MeshCore-nätverk – egen stil ovanpå Bootstrap 5
+   Alla färger, typsnitt och mått ligger som CSS-variabler nedan.
+   ========================================================================== */
+
+:root {
+  --ink: #15211D;          /* brödtext, rubriker */
+  --ink-soft: #3B4A44;     /* sekundär text */
+  --ink-mute: #4A5A53;     /* kortext */
+  --ink-faint: #6B7A73;    /* etiketter */
+
+  --bg: #FAF8F3;           /* sidbakgrund */
+  --bg-sand: #EFEBE1;      /* avvikande sektion */
+  --surface: #FFFFFF;      /* kort, paneler */
+  --line: #E3DED1;         /* ramar */
+  --line-strong: #DDD7C8;
+  --line-dashed: #C9C2B0;
+
+  --green: #0B5C46;        /* primärfärg */
+  --green-dark: #08402F;
+  --lime: #D9F27E;         /* accent */
+  --dark: #15211D;         /* mörk sektion */
+
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+
+  --radius-lg: 22px;
+  --radius: 16px;
+  --nav-h: 84px;
+}
+
+/* ---------- Bas ---------- */
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; }
+a { color: var(--green); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--green-dark); }
+/* g-5-raderna använder 3rem gutter → containerns padding måste matcha, annars
+   sticker de negativa radmarginalerna ut och ger horisontell scroll. */
+.container { max-width: 1140px; --bs-gutter-x: 3rem; }
+section[id] { scroll-margin-top: var(--nav-h); }
+html { scroll-behavior: smooth; }
+
+/* ---------- Navbar ---------- */
+.site-nav {
+  background: rgba(250, 248, 243, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.brand { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--ink); }
+.brand:hover { color: var(--ink); }
+.brand-mark {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 10px;
+  background: var(--green); color: var(--lime);
+  font-family: var(--font-display); font-weight: 700; font-size: 15px;
+}
+.brand-mark-lime { background: var(--lime); color: var(--green); }
+.brand-name { font-family: var(--font-display); font-weight: 600; font-size: 17px; }
+.site-nav-list { gap: 4px; font-size: 15px; }
+.site-nav-list .nav-link { color: var(--ink-soft); text-decoration: none; }
+.site-nav-list .nav-link:hover { color: var(--green); }
+
+/* ---------- Återanvändbar typografi ---------- */
+.eyebrow {
+  font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--green); font-weight: 600; margin: 0 0 12px;
+}
+.eyebrow-light { color: var(--lime); font-size: 13px; margin-bottom: 18px; }
+.section-title { font-size: clamp(28px, 3.4vw, 38px); font-weight: 700; line-height: 1.12; margin: 0 0 18px; }
+.lead-text { font-size: 19px; line-height: 1.65; margin: 0 0 18px; max-width: 62ch; }
+.section-lead { font-size: 18px; margin-bottom: 36px; color: var(--ink-soft); }
+.body-text { font-size: 17px; line-height: 1.7; color: var(--ink-soft); margin: 0 0 18px; max-width: 62ch; }
+.feature-title { font-size: 18px; font-weight: 600; margin: 0 0 8px; }
+.feature-text { font-size: 15.5px; line-height: 1.65; color: var(--ink-mute); margin: 0; }
+
+/* ---------- Sektioner ---------- */
+.section { padding: 70px 0; }
+.section-intro { padding: 80px 0 20px; }
+.section-sand { background: var(--bg-sand); }
+.section-faq { padding: 20px 0 90px; }
+.section-dark { background: var(--dark); color: #F1F4EC; }
+.section-dark .section-title { color: #F1F4EC; }
+.section-dark .section-lead { color: #C3CFC6; max-width: 60ch; margin-bottom: 40px; }
+
+/* ---------- Knappar ---------- */
+.btn-row { gap: 12px; }
+.btn-pill {
+  display: inline-block; padding: 13px 24px; border-radius: 999px;
+  font-weight: 600; text-decoration: none; font-size: 16px;
+}
+.btn-pill-lime { background: var(--lime); color: #11332A; }
+.btn-pill-lime:hover { background: #cbe96a; color: #11332A; }
+.btn-pill-green { background: var(--green); color: #F4F7E9; }
+.btn-pill-green:hover { background: var(--green-dark); color: #F4F7E9; }
+.btn-pill-ghost { border: 1px solid rgba(244, 247, 233, 0.45); color: #F4F7E9; }
+.btn-pill-ghost:hover { background: rgba(255, 255, 255, 0.08); color: #F4F7E9; }
+
+/* ---------- Hero ---------- */
+.hero { background: var(--green); color: #F4F7E9; padding: 72px 0 64px; }
+.hero-title { font-size: clamp(34px, 5.2vw, 58px); font-weight: 700; line-height: 1.06; margin: 0 0 22px; }
+.hero-lead { font-size: clamp(17px, 2vw, 20px); line-height: 1.6; max-width: 38ch; color: #DCE7DD; margin: 0 0 28px; }
+.status-card {
+  border: 1px solid rgba(217, 242, 126, 0.3); border-radius: 18px;
+  padding: 26px 28px; background: rgba(255, 255, 255, 0.05);
+}
+.stat-num { font-family: var(--font-display); font-size: 40px; font-weight: 700; line-height: 1; }
+.stat-label { font-size: 14px; color: #CBDACD; margin-top: 6px; }
+.status-card-note {
+  border-top: 1px solid rgba(244, 247, 233, 0.15); padding-top: 18px;
+  font-size: 15px; color: #EDF3E2; line-height: 1.55;
+}
+
+/* ---------- Panel & kort ---------- */
+.panel {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius-lg); padding: clamp(26px, 4vw, 56px);
+}
+.card-plain {
+  height: 100%; background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 26px;
+}
+.card-green { background: var(--green); color: #F4F7E9; border-color: var(--green); }
+.card-green .card-text { color: #DCE7DD; }
+.card-rule { width: 32px; height: 4px; border-radius: 2px; background: var(--lime); margin-bottom: 18px; }
+.card-kicker {
+  font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--green); font-weight: 600; margin-bottom: 12px;
+}
+.card-title { font-size: 19px; font-weight: 600; margin: 0 0 10px; }
+.card-text { font-size: 15.5px; line-height: 1.65; color: var(--ink-mute); }
+.callout { border: 1px dashed var(--line-dashed); border-radius: var(--radius); padding: 22px 24px; }
+.callout-strong { color: var(--ink); }
+
+/* ---------- Faktabox ---------- */
+.factbox { background: var(--bg); border: 1px solid var(--line-strong); border-radius: 18px; overflow: hidden; }
+.factgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line-strong); }
+.factcell { background: var(--bg); padding: 24px; }
+.fact-label { font-size: 13px; color: var(--ink-faint); margin-bottom: 6px; }
+.fact-value { font-family: var(--font-display); font-size: 32px; font-weight: 700; }
+.factbox-note { padding: 22px 24px; border-top: 1px solid var(--line-strong); }
+
+/* ---------- Steg (mörk sektion) ---------- */
+.step { height: 100%; border: 1px solid rgba(241, 244, 236, 0.16); border-radius: var(--radius); padding: 26px; }
+.step .card-title { color: #F1F4EC; }
+.step .card-text { color: #B9C6BC; }
+.step-num { font-family: var(--font-display); font-size: 14px; font-weight: 700; color: var(--lime); margin-bottom: 14px; }
+.step-highlight { background: var(--green); border-color: var(--green); }
+.step-highlight .card-text { color: #DCE7DD; }
+.step-link { font-size: 15px; font-weight: 600; color: var(--lime); }
+.step-link:hover { color: #fff; }
+
+/* ---------- Länklista ---------- */
+.linklist { display: flex; flex-direction: column; gap: 16px; }
+.linkcard {
+  display: block; text-decoration: none; color: inherit;
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 26px 28px;
+  transition: border-color .15s ease, transform .15s ease;
+}
+.linkcard:hover { border-color: var(--green); transform: translateY(-2px); color: inherit; }
+.linkcard-green { background: var(--green); border-color: var(--green); }
+.linkcard-green:hover { border-color: var(--lime); }
+.linkcard-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; margin-bottom: 8px; }
+.linkcard-title { font-family: var(--font-display); font-size: 20px; font-weight: 600; color: var(--ink); }
+.linkcard-meta { font-size: 13px; color: var(--green); }
+.linkcard-text { font-size: 15.5px; line-height: 1.65; color: var(--ink-mute); margin: 0; max-width: 64ch; }
+.linkcard-green .linkcard-title { color: #F4F7E9; }
+.linkcard-green .linkcard-meta { color: var(--lime); }
+.linkcard-green .linkcard-text { color: #DCE7DD; }
+
+/* ---------- FAQ (Bootstrap accordion) ---------- */
+.faq-accordion {
+  --bs-accordion-border-color: var(--line);
+  --bs-accordion-bg: var(--surface);
+  --bs-accordion-btn-focus-box-shadow: none;
+  --bs-accordion-active-color: var(--ink);
+}
+.faq-accordion .accordion-button { font-family: var(--font-display); font-weight: 600; }
+.faq-accordion .accordion-button:not(.collapsed) { background: var(--bg-sand); color: var(--ink); box-shadow: none; }
+.faq-accordion .accordion-button:focus { box-shadow: none; border-color: var(--line-strong); }
+.faq-accordion .accordion-body { font-size: 16px; line-height: 1.7; color: var(--ink-mute); }
+
+/* ---------- Footer ---------- */
+.site-footer { background: var(--green); color: #DCE7DD; padding: 52px 0 40px; }
+.footer-brand { margin-bottom: 14px; }
+.footer-brand .brand-name { color: #F4F7E9; }
+.footer-text { font-size: 15px; line-height: 1.65; margin: 0; max-width: 46ch; }
+.footer-heading {
+  font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--lime); font-weight: 600; margin-bottom: 12px;
+}
+.footer-links { display: flex; flex-direction: column; gap: 8px; font-size: 15px; }
+.footer-links a { color: #DCE7DD; text-decoration: none; }
+.footer-links a:hover { color: #fff; text-decoration: underline; }
+.footer-bottom {
+  border-top: 1px solid rgba(220, 231, 221, 0.2);
+  padding-top: 20px; margin-top: 12px;
+  font-size: 13.5px; color: #AEC2B3;
+}
+
+/* ---------- Mobil ---------- */
+@media (max-width: 991.98px) {
+  .site-nav-list { padding: 12px 0; }
+  .hero { padding: 56px 0 48px; }
+  .section { padding: 56px 0; }
+}
+@media (max-width: 575.98px) {
+  .factgrid { grid-template-columns: 1fr; }
+  .panel { padding: 24px; }
+}
