@@ -68,8 +68,9 @@ testas men publiceras inte.
 docker pull ghcr.io/rickardpettersson/nyo-mesh.se:latest
 ```
 
-Taggar: `latest` och `main-<sha>` från `main`, samt `1.2.3` och `1.2` för en
-tagg `v1.2.3`. Images byggs för `linux/amd64` och `linux/arm64` (Raspberry Pi).
+Taggar: `latest`, `main` och `sha-<kort sha>` från `main`, samt `1.2.3` och `1.2`
+för en tagg `v1.2.3`. Images byggs för `linux/amd64` och `linux/arm64`
+(Raspberry Pi).
 
 > Första publiceringen skapar paketet som **privat**. Ska imagen vara publik:
 > repots sida → Packages → `nyo-mesh.se` → Package settings → Change visibility.
