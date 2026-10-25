@@ -76,6 +76,7 @@ tagg `v1.2.3`. Images byggs för `linux/amd64` och `linux/arm64` (Raspberry Pi).
 
 ## Att göra
 
-- Egen nätverkskarta – just nu pekar länkarna på `https://map.meshcore.dev/`.
+- Egen nätverkskarta – just nu pekar länkarna på `https://map.meshcore.io/`
+  (centrerad på Nyköping via `?lat=58.7495&lon=17.0368&zoom=12`).
 - Kontaktväg utöver Discord (mejl eller formulär).
 - Bilder på noder/antenner; sidan har medvetet inga bilder ännu.
